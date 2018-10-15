@@ -1,15 +1,15 @@
 #pragma once
 /*
 FILE CLIENT.H
-½«¿Í»§»úÊµÌå»¯³ÉÒ»¸öclient¶ÔÏó£¬ÓÃÓÚÊı¾İ»º´æ³ØµÈ
+å°†å®¢æˆ·æœºå®ä½“åŒ–æˆä¸€ä¸ªclientå¯¹è±¡ï¼Œç”¨äºæ•°æ®ç¼“å­˜æ± ç­‰
 */
 
 #ifndef __CLIENT_H__
 #define __CLIENT_H__
 
-#include <WinSock2.h>
+//#include <WinSock2.h>
 
-#include <windows.h>
+//#include <windows.h>
 #include "object.h"
 #include "point.h"
 #include "tank.h"
@@ -31,14 +31,14 @@ FILE CLIENT.H
 
 
 
-#define dPACKET_ALIVE_CHECK		0	//ÓÃÓÚÁ¬½Ó×´Ì¬µÄÈ·ÈÏ
-#define dPACKET_CHANGE_NICK		1	//´ÂºÅµÄĞŞ¸Ä
-#define dPACKET_MAINTANK_POS	2   //¿Í»§-¡··şÎñÆ÷  ÓÃÀ´±¨¸æ×Ô¼ºµÄÎ»ÖÃ
-#define dPACKET_IS_READY		3	//¿Í»§-¡··şÎñÆ÷ ±íÊ¾×Ô¼º×¼±¸¿ªÊ¼ÓÎÏ·
-#define dPACKET_NEW_BULLET		4	//¿Í»§-¡··şÎñÆ÷ ĞÂµÄ×Óµ¯´´½¨µÄÊ±ºò¾Í»á´«Êä¸ÃÊı¾İ°ü(id,x,y,dir)
-#define dPACKET_ALL_POS			5	//·şÎñÆ÷-¡·¿Í»§  ËùÓĞÔªËØµÄÎ»ÖÃĞÅÏ¢£¨each item:id,x,y,dir£©(tank / bullet / )
-#define dPACKET_BOOM_ACT		6   //·şÎñÆ÷-¡·¿Í»§ Ö´ĞĞ±¬Õ¨µÄÔªËØ£¨Ì¹¿Ë & Õ¨µ¯£©£¨id,boom_x,boom_Y£©
-#define dPACKET_FRIEND			7	//·şÎñÆ÷-¡·¿Í»§ ·şÎñÆ÷ÕÒµ½ÁËÒ»¸öÓëÖ®¹²Í¬×÷Õ½µÄ¶ÓÓÑ£¬ĞÅÏ¢:¶Ô·½µÄnickNameºÍipµØÖ·
+#define dPACKET_ALIVE_CHECK		0	//ç”¨äºè¿æ¥çŠ¶æ€çš„ç¡®è®¤
+#define dPACKET_CHANGE_NICK		1	//ç»°å·çš„ä¿®æ”¹
+#define dPACKET_MAINTANK_POS	2   //å®¢æˆ·-ã€‹æœåŠ¡å™¨  ç”¨æ¥æŠ¥å‘Šè‡ªå·±çš„ä½ç½®
+#define dPACKET_IS_READY		3	//å®¢æˆ·-ã€‹æœåŠ¡å™¨ è¡¨ç¤ºè‡ªå·±å‡†å¤‡å¼€å§‹æ¸¸æˆ
+#define dPACKET_NEW_BULLET		4	//å®¢æˆ·-ã€‹æœåŠ¡å™¨ æ–°çš„å­å¼¹åˆ›å»ºçš„æ—¶å€™å°±ä¼šä¼ è¾“è¯¥æ•°æ®åŒ…(id,x,y,dir)
+#define dPACKET_ALL_POS			5	//æœåŠ¡å™¨-ã€‹å®¢æˆ·  æ‰€æœ‰å…ƒç´ çš„ä½ç½®ä¿¡æ¯ï¼ˆeach item:id,x,y,dirï¼‰(tank / bullet / )
+#define dPACKET_BOOM_ACT		6   //æœåŠ¡å™¨-ã€‹å®¢æˆ· æ‰§è¡Œçˆ†ç‚¸çš„å…ƒç´ ï¼ˆå¦å…‹ & ç‚¸å¼¹ï¼‰ï¼ˆid,boom_x,boom_Yï¼‰
+#define dPACKET_FRIEND			7	//æœåŠ¡å™¨-ã€‹å®¢æˆ· æœåŠ¡å™¨æ‰¾åˆ°äº†ä¸€ä¸ªä¸ä¹‹å…±åŒä½œæˆ˜çš„é˜Ÿå‹ï¼Œä¿¡æ¯:å¯¹æ–¹çš„nickNameå’Œipåœ°å€
 
 
 
@@ -62,23 +62,23 @@ FILE CLIENT.H
 class client {
 public:
 	/*
-	ÓÎÏ·µÄÖ÷ÒªÊı¾İ
+	æ¸¸æˆçš„ä¸»è¦æ•°æ®
 	*/
 	MainTank mainTank;
 
 	MainTank friendTank;    //new added here
 
-	char friend_ip[20];       //¶ÓÓÑµÄipµØÖ·
-	char friend_nickName[64];	//¶ÓÓÑµÄÃû×Ö		
+	char friend_ip[20];       //é˜Ÿå‹çš„ipåœ°å€
+	char friend_nickName[64];	//é˜Ÿå‹çš„åå­—		
 
-	bool got_friend = false;	//ÊÇ·ñÄÃµ½ÁË¶ÓÓÑµÄĞÅÏ¢
+	bool got_friend = false;	//æ˜¯å¦æ‹¿åˆ°äº†é˜Ÿå‹çš„ä¿¡æ¯
 
 								// Bullet list
 
-								//ÓÑ¾ü¿ÉÒÔ¹²ÏíÒ»¸ö×Óµ¯¼¯ºÏ
+								//å‹å†›å¯ä»¥å…±äº«ä¸€ä¸ªå­å¼¹é›†åˆ
 	list<Object*> lstMainTankBullets;
 
-	//µçÄÔÌ¹¿Ë¹²ÏíÒ»¸ö×Óµ¯¼¯ºÏ
+	//ç”µè„‘å¦å…‹å…±äº«ä¸€ä¸ªå­å¼¹é›†åˆ
 	list<Object*> lstBullets;
 
 	// Bomb List
@@ -89,33 +89,33 @@ public:
 
 
 	/*
-	end of ÓÎÏ·µÄÖ÷ÒªÊı¾İ
+	end of æ¸¸æˆçš„ä¸»è¦æ•°æ®
 	*/
 
 
 	/*
-	³õÊ¼»¯·½·¨
+	åˆå§‹åŒ–æ–¹æ³•
 	*/
 	client();
 	client(MainTank mainTank, MainTank friendTank, list<Object*> lstMainTankBullets, list<Object*>lstBullets, list<Object*>lstBombs, list<Tank*>lstTanks);
 
 	/*
-	³¢ÊÔ´ÓÌ×½Ó×Ö´¦¶ÁÈ¡Êı¾İ£ºselect»úÖÆ
+	å°è¯•ä»å¥—æ¥å­—å¤„è¯»å–æ•°æ®ï¼šselectæœºåˆ¶
 	*/
 	void RecvData();
 
 	/*
-	ÒªÁ¬½ÓµÄ·şÎñÆ÷IP
+	è¦è¿æ¥çš„æœåŠ¡å™¨IP
 	*/
 	char m_ServerIP[128];
 
 	/*
-	´ÂºÅ
+	ç»°å·
 	*/
 	char m_NickName[64];
 
 	/*
-	ÓÃÓÚrecv queueµÄ±äÁ¿
+	ç”¨äºrecv queueçš„å˜é‡
 	*/
 	int m_recvPos;
 	int m_recvSize;
@@ -124,37 +124,37 @@ public:
 
 
 	/*
-	¿Í»§¶ËµÄÌ×½Ó×Ö
+	å®¢æˆ·ç«¯çš„å¥—æ¥å­—
 	*/
 	SOCKET m_sock;
 
 
 	/*
-	¹Ø±ÕÓÎÏ·
+	å…³é—­æ¸¸æˆ
 	*/
 	void closeGame()
 		;
 
 	/*
-	ÉèÖÃÌ×½Ó×ÖÎªNonBlockingÄ£Ê½
+	è®¾ç½®å¥—æ¥å­—ä¸ºNonBlockingæ¨¡å¼
 
 	*/
 	void NonBlock(SOCKET sock);
 
 	/*
-	function:½¨Á¢Á¬½Ó£¬Á¬½ÓÌ×½Ó×Ö±£´æÔÚclient.m_sockÖĞ
-	@return: TRUE£¬Á¬½Ó³É¹¦£»FALSE£ºÁ¬½ÓÊ§°Ü
+	function:å»ºç«‹è¿æ¥ï¼Œè¿æ¥å¥—æ¥å­—ä¿å­˜åœ¨client.m_sockä¸­
+	@return: TRUEï¼Œè¿æ¥æˆåŠŸï¼›FALSEï¼šè¿æ¥å¤±è´¥
 	*/
 	BOOL ConnenctToServer(char*host, int port);
 
 	/*
-	¶ÔËùÓĞ½ÓÊÕµ½µÄ»º´æÊı¾İ°ü½øĞĞÏìÓ¦
+	å¯¹æ‰€æœ‰æ¥æ”¶åˆ°çš„ç¼“å­˜æ•°æ®åŒ…è¿›è¡Œå“åº”
 	*/
 	void ReadRecvBuff();
 
 
 	/*
-	Êı¾İ´¦ÀíÔªº¯Êı
+	æ•°æ®å¤„ç†å…ƒå‡½æ•°
 	*/
 	//BYTE
 	void PutByte(char *packet, BYTE value, int &nPos);
@@ -162,23 +162,23 @@ public:
 
 
 	/*
-	ÔÚpPacket²ÎÊıµÄnPos·ÅÖÃWORDÀàĞÍµÄvalueµÄÖµ
+	åœ¨pPacketå‚æ•°çš„nPosæ”¾ç½®WORDç±»å‹çš„valueçš„å€¼
 	*/
 	void PutWord(char *pPacket, WORD value, int & nPos);
 
 	/*
-	°ÉpPacket²ÎÊınPosÎ»ÖÃµÄÖµÒÔWORDÀàĞÍ·µ»Ø
+	å§pPacketå‚æ•°nPosä½ç½®çš„å€¼ä»¥WORDç±»å‹è¿”å›
 	*/
 
 	WORD GetWord(char* pPacket, int& nPos);
 
 	/*
-	ÔÚpPacket²ÎÊıµÄnPos·ÅÖÃDWORDÀàĞÍµÄvalueµÄÖµ
+	åœ¨pPacketå‚æ•°çš„nPosæ”¾ç½®DWORDç±»å‹çš„valueçš„å€¼
 	*/
 	void PutDword(char *pPacket, DWORD value, int & nPos);
 
 	/*
-	°ÉpPacket²ÎÊınPosÎ»ÖÃµÄÖµÒÔDWORDÀàĞÍ·µ»Ø
+	å§pPacketå‚æ•°nPosä½ç½®çš„å€¼ä»¥DWORDç±»å‹è¿”å›
 	*/
 
 	DWORD GetDword(char* pPacket, int& nPos);
@@ -186,53 +186,53 @@ public:
 
 
 	/*
-	ÔÚpPacket²ÎÊıµÄnPos·ÅÖÃshortÀàĞÍµÄvalueµÄÖµ
+	åœ¨pPacketå‚æ•°çš„nPosæ”¾ç½®shortç±»å‹çš„valueçš„å€¼
 	*/
 	void PutShort(char *pPacket, short value, int & nPos);
 
 	/*
-	°ÉpPacket²ÎÊınPosÎ»ÖÃµÄÖµÒÔshortÀàĞÍ·µ»Ø
+	å§pPacketå‚æ•°nPosä½ç½®çš„å€¼ä»¥shortç±»å‹è¿”å›
 	*/
 
 	short GetShort(char* pPacket, int& nPos);
 
 
 	/*
-	ÔÚpPacket²ÎÊıµÄnPos·ÅÖÃintÀàĞÍµÄvalueµÄÖµ
+	åœ¨pPacketå‚æ•°çš„nPosæ”¾ç½®intç±»å‹çš„valueçš„å€¼
 	*/
 	void PutInteger(char *pPacket, int value, int & nPos);
 
 	/*
-	°ÉpPacket²ÎÊınPosÎ»ÖÃµÄÖµÒÔintÀàĞÍ·µ»Ø
+	å§pPacketå‚æ•°nPosä½ç½®çš„å€¼ä»¥intç±»å‹è¿”å›
 	*/
 
 	int GetInteger(char* pPacket, int& nPos);
 
 	/*
-	ÔÚpPacket²ÎÊıµÄnPos·ÅÖÃ×Ö·û´®
+	åœ¨pPacketå‚æ•°çš„nPosæ”¾ç½®å­—ç¬¦ä¸²
 	*/
 	void PutString(char *pPacket, char *str, int & nPos);
 
 	/*
-	°ÉpPacket²ÎÊınPosÎ»ÖÃµÄ×Ö·û´®¸´ÖÆµ½pBuffer£¨°üÀ¨NULLµÄ´¦Àí£©
+	å§pPacketå‚æ•°nPosä½ç½®çš„å­—ç¬¦ä¸²å¤åˆ¶åˆ°pBufferï¼ˆåŒ…æ‹¬NULLçš„å¤„ç†ï¼‰
 	*/
 
 	void GetString(char* pPacket, char *pBuffer, int& nPos);
 
 
 	/*
-	Êı¾İ°ü´óĞ¡ÊäÈëº¯Êı
+	æ•°æ®åŒ…å¤§å°è¾“å…¥å‡½æ•°
 	*/
 	void PutSize(char* packet, WORD nPos);
 
 	/*
-	Êı¾İ´¦Àíº¯Êı
+	æ•°æ®å¤„ç†å‡½æ•°
 	*/
 	void ReadRecvBuff(bool& bGameOver);
 
 
 	/*
-	Êı¾İ°ü·¢ËÍ
+	æ•°æ®åŒ…å‘é€
 	*/
 	void  OnSendIsReady();
 
@@ -245,44 +245,44 @@ public:
 
 
 	/*
-	´¦Àí½ÓÊÕµ½µÄÊı¾İ°ü
+	å¤„ç†æ¥æ”¶åˆ°çš„æ•°æ®åŒ…
 	*/
 
 	/*
-	´¦ÀíÁ¬½Ó×´Ì¬È·ÈÏµÄÊı¾İ°ü
+	å¤„ç†è¿æ¥çŠ¶æ€ç¡®è®¤çš„æ•°æ®åŒ…
 	*/
 	//void HANDLE_PACKET_AliveCheck(sPCLIENT_DATA pClient);
 
 	/*
-	ĞŞ¸Ä´ÂºÅµÄÊı¾İ°ü
+	ä¿®æ”¹ç»°å·çš„æ•°æ®åŒ…
 	*/
 	//	void HANDLE_PACKET_ChangeNick(sPCLIENT_DATA pClient);
 
 
 	/*
-	¸üĞÂËùÓĞÔªËØµÄÎ»ÖÃ
+	æ›´æ–°æ‰€æœ‰å…ƒç´ çš„ä½ç½®
 	@para:char* package
 	*/
 	void HANDLE_ALL_POS(char*package, bool& bGameOver);
 
 	/*
-	Ö´ĞĞ±¬Õ¨
+	æ‰§è¡Œçˆ†ç‚¸
 	*/
 	void HANDLE_BOOM_ACT(char* package, bool& bGameOver);
 
 
 	/*
-	´¦Àí·şÎñÆ÷Îª¿Í»§ÕÒµ½ÁË¶ÓÓÑµÄĞÅÏ¢
+	å¤„ç†æœåŠ¡å™¨ä¸ºå®¢æˆ·æ‰¾åˆ°äº†é˜Ÿå‹çš„ä¿¡æ¯
 	*/
 	void HANDLE_FRIEND(char* package);
 
 
-	//¿Í»§»úÓ¦µ±ÒªÎ¬»¤×Óµ¯¡¢ÎÒ·½Ì¹¿Ë£¬µĞ¾üÌ¹¿Ë¡¢ÓÑ·½Ì¹¿ËµÄĞÅÏ¢
+	//å®¢æˆ·æœºåº”å½“è¦ç»´æŠ¤å­å¼¹ã€æˆ‘æ–¹å¦å…‹ï¼Œæ•Œå†›å¦å…‹ã€å‹æ–¹å¦å…‹çš„ä¿¡æ¯
 
 
 
 	/*
-	Õ¹Ê¾Ä¿Ç°´æÔÚµÄËùÓĞÎïÌå£¬Èç¹ûÖ÷Õ½Ì¹¿ËËÀÍöÔòÕ¹Ê¾gameOver½çÃæ
+	å±•ç¤ºç›®å‰å­˜åœ¨çš„æ‰€æœ‰ç‰©ä½“ï¼Œå¦‚æœä¸»æˆ˜å¦å…‹æ­»äº¡åˆ™å±•ç¤ºgameOverç•Œé¢
 	*/
 	void move_display_all(bool& bGameOver);
 
